@@ -55,10 +55,6 @@ static은 클래스 변수를 선언할때 붙이는 표현이다. 때문에 클
 
 #### Q. 클래스 변수와 인스턴스 변수의 차이는 무엇일까요?
 
-
-
-![Java_ static변수, static메소드, 변수 유효범위, 싱글톤패턴, 배열](https://blog.kakaocdn.net/dn/vkdWX/btrinApSlRj/IunknXtL85BT3MCHKTTXjK/img.png)
-
 *[참고 자료](https://codebyjihye.tistory.com/entry/1115-static%EB%B3%80%EC%88%98-static%EB%A9%94%EC%86%8C%EB%93%9C-%EB%B3%80%EC%88%98-%EC%9C%A0%ED%9A%A8%EB%B2%94%EC%9C%84-%EC%8B%B1%EA%B8%80%ED%86%A4%ED%8C%A8%ED%84%B4-%EB%B0%B0%EC%97%B4)*
 
 
