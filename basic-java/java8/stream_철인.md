@@ -178,6 +178,78 @@ class Main {
 }
 ```
 
+# 추가연습
+
+```Java
+System.out.println("1. 2011년에 일어난 모든 트랜잭션을 찾아 값을 오름차순으로 정리.");
+//변수에 담기.
+List<Transaction> result = transactions.stream()
+.filter(i->i.getYear()==2011)
+.sorted(Comparator.comparing(Transaction::getValue))
+.collect(Collectors.toList());
+
+//그냥 뱉기
+transactions.stream()
+.filter(i->i.getYear()==2011)
+.sorted(Comparator.comparing(Trasaction::getValue))
+.forEach(i->System.out.println(i.toString()));
+
+System.out.println();
+System.out.println("2. 거래자가 근무하는 모든 도시를 중복없이 나열.");
+transactions.stream()
+.map(Transaction::getTrader)
+.map(Trader::getCITY)
+.distinct()
+.forEach(System.out::println)
+
+System.out.println();
+System.out.println("3. Cambridge에서 근무하는 모든 거래자를 찾아서 이름순으로 정렬.");
+transactions.stream()
+.map(Transactions::getTrader)
+.filter(i->i.getCITY().equals("Cambridge"))
+.sorted(Comparator.comparing(Trader::getName))
+.map(Trader::getName)
+.forEach(System.out::println);
+
+System.out.println();
+System.out.println("4. 모든 거래자의 이름을 알파벳순으로 정리해서 반환");
+transactions.stream()
+.map(Transaction::getTrader)
+.sorted(Comparator.comparing(Trader::getName))
+.map(Trader::getNmae)
+.distinct()
+.forEach(System.out::println);
+
+System.out.println();
+System.out.println("5. 밀라노에 거래자가 있는가?");
+if(transactions.stream()
+.map(Transaction::getTrader)
+.map(Trader::getCITY)
+.anyMatch(i->i.equals("Milan"))) System.out.println("ㅇㅇ")
+else System.out.println("ㄴㄴ");
+
+System.out.println();
+System.out.println("6. 케임브리지에 거주하는 거래자의 모든 트랜잭션값을 출력하시오.");
+transactions.stream()
+.filter(i->i.getTrader().getCITY().equals("Cambridge"))
+.map(Transaction::getValue)
+.forEach(System.out::println)
+
+System.out.println();
+System.out.println("7. 전체 트랜잭션 중 최댓값은 얼마인가?");
+transactions.stream()
+.map(Transaction::getValue)
+.reduce(Integer::max)
+.ifPresent(System.out::println)
+
+System.out.println();
+System.out.println("8. 전체 트랜잭션 중 최솟값은 얼마인가?");
+transactions.stream()
+.map(Transaction::getValue)
+.reduce(Integer::min)
+.ifPresent(System.out::println)
+```
+
 # 느낀점
 - 하나의 flow로 흘러가는 로직에서는 유용하게 사용 될것같다.
 - Stream 사용시 실행시간이 올라갔다. 따라서 Java언어에서는 Stream을 사용함에 따라 프로그램에 무리를 주지는 않는지 고려하고 사용해야 할것같다.
@@ -185,3 +257,5 @@ class Main {
 - 아래 링크를 통해 연습을 더 했으면 좋겠다.
   - https://intrepidgeeks.com/tutorial/java-stream-exercise
   - https://mangkyu.tistory.com/116
+- 하나의 스트림내에 두개의 큰 로직을 사용하는것을 지양하자(할거면 새롭게 스트림을 만들어서 사용)
+- 매핑을 한번 했으면 다시 풀 수 없으므로 필요한 만큼만 사용하자.
