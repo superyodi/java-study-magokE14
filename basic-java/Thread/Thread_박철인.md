@@ -101,7 +101,7 @@ System.out.println("출금 완료");
 static boolean runFlag = false;
 public synchronized void saveMoney(int save){
 int m = money;
-if(runFlag){
+if(!runFlag){
 try{
 System.out.println("출금작업중.. 기다리세요");
 wait();
