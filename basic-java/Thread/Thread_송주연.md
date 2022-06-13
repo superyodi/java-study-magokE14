@@ -15,11 +15,6 @@
 ### JVM 구조 
 
 
-
-![image-20220610075354924](/Users/superyodi/Library/Application Support/typora-user-images/image-20220610075354924.png)
-
-![image-20220610075615554](/Users/superyodi/Library/Application Support/typora-user-images/image-20220610075615554.png)
-
 **JVM**
 
 자바 바이트 코드를 실행하는 가상머신
