@@ -357,6 +357,7 @@ public class Client {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(state.equals("WAIT") || state.equals("READY") ) {
+					System.out.println("state: " + state);
 					try {
 						Map<String, Object> sendCode = new HashMap<>();
 						
@@ -380,6 +381,8 @@ public class Client {
 								userLabel = new JLabel(name);
 							}
 							playerListBox.add(userLabel);
+							playerListBox.revalidate();
+							playerListBox.repaint();
 						}
 						
 						// 클라이언트 상태 보내기
@@ -401,7 +404,7 @@ public class Client {
 							setStep3();
 						}else {
 							String label = null;
-							System.out.println("serverState: " + serverState);
+							// System.out.println("serverState: " + serverState);
 							if(serverState.equals("STEP2_WAIT")) {
 								label = "모든 플에이어가 준비 버튼을 눌러야 시작합니다.";
 							}else if(serverState.equals("STEP2_5")){
