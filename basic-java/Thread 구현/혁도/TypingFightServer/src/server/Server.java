@@ -92,46 +92,47 @@ public class Server{
 		}
 		
 		System.out.println("서버 실행");
+
+		timer10 = new Timer(10, e -> {
+			System.out.println("서버 상태: " + this.state);
+			if(this.state.equals("STEP2_WAIT")) {
+				boolean isAllReady = true;
+				if(userMap.size() == 0) {
+					isAllReady = false;
+				}else {
+					for(User user : userMap.values()) {
+						if(!user.getState().equals("READY")) {
+							isAllReady = false;
+						}
+					}
+				}
+				
+				if(isAllReady) {
+					this.state = "STEP2_5";	
+				}
+			}
+		});
+		timer10.start();
+
+		timer1000 = new Timer(1000, e -> {
+			if(this.state.equals("STEP2_5")) {
+				this.state = "STEP2_4";
+			}else if(this.state.equals("STEP2_4")) {
+				this.state = "STEP2_3";
+			}else if(this.state.equals("STEP2_3")) {
+				this.state = "STEP2_2";
+			}else if(this.state.equals("STEP2_2")) {
+				this.state = "STEP2_1";
+			}else if(this.state.equals("STEP2_1")) {
+				this.state = "STEP3_START";
+				problem = new Problem();
+			}
+		});
+		timer1000.start();
+		
 		serverThread = new Thread(()->{
 			while(!Thread.currentThread().isInterrupted()) {
 				// System.out.println("서버 실행 중");
-
-				timer10 = new Timer(10, e -> {
-					System.out.println("서버 상태: " + this.state);
-					if(this.state.equals("STEP2_WAIT")) {
-						boolean isAllReady = true;
-						if(userMap.size() == 0) {
-							isAllReady = false;
-						}else {
-							for(User user : userMap.values()) {
-								if(!user.getState().equals("READY")) {
-									isAllReady = false;
-								}
-							}
-						}
-						
-						if(isAllReady) {
-							this.state = "STEP2_5";	
-						}
-					}
-				});
-				timer10.start();
-
-				timer1000 = new Timer(1000, e -> {
-					if(this.state.equals("STEP2_5")) {
-						this.state = "STEP2_4";
-					}else if(this.state.equals("STEP2_4")) {
-						this.state = "STEP2_3";
-					}else if(this.state.equals("STEP2_3")) {
-						this.state = "STEP2_2";
-					}else if(this.state.equals("STEP2_2")) {
-						this.state = "STEP2_1";
-					}else if(this.state.equals("STEP2_1")) {
-						this.state = "STEP3_START";
-						problem = new Problem();
-					}
-				});
-				timer1000.start();
 				
 				try {
 						Socket socket = serverSoket.accept();
