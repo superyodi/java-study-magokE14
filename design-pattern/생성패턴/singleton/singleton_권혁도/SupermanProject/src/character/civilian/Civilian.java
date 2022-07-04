@@ -27,17 +27,13 @@ public class Civilian {
 	public Villain getVillain() {
 		return villain;
 	}
-
-	public void help() {
-		System.out.println("µµøÕ¡‡ø‰ Ω¥∆€∏«!");
-	}
 	
 	public void setAttacked(Villain villain) {
 		state = CivilainState.ATTACKED;
 		this.villain = villain; 
 		Superman superman = Superman.getSuperman();
 		superman.called(this);
-		System.out.println("µµøÕ¡‡ø‰ Ω¥∆€∏«");
+		//System.out.println("µµøÕ¡‡ø‰ Ω¥∆€∏«");
 	}
 	
 	public void attacked(int damage) {
@@ -45,7 +41,7 @@ public class Civilian {
 		if(hp < damage) {
 			state = CivilainState.DEAD;
 			villain.setState(VillainState.ALIVE);
-			System.out.println("Ω√πŒ¿Ã ¡◊¿Ω");
+			//System.out.println("Ω√πŒ¿Ã ¡◊¿Ω");
 		}
 	}
 }
