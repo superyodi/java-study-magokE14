@@ -7,54 +7,54 @@ import city.Seoul;
 public class Main {
 	public static void main(String[] args) {
 		// =================================================
-		// ¼­¿ï
+		// ì„œìš¸
 		// =================================================
 		StringBuffer winSb = new StringBuffer();
 		StringBuffer loseSb = new StringBuffer();
 		int civilianCount = 20000;
 		int villainCount = 100;
 		winSb.append("==============================\n");
-		winSb.append("½´ÆÛ¸ÇÀÌ ¼­¿ïÀ» ±¸Çß½À´Ï´Ù.\n");
+		winSb.append("ìŠˆí¼ë§¨ì´ ì„œìš¸ì„ êµ¬í–ˆìŠµë‹ˆë‹¤.\n");
 		winSb.append("==============================\n");
 		loseSb.append("==============================\n");
-		loseSb.append("¾Ç´ç¿¡ ÀÇÇØ ¼­¿ï¿¡ È¥¶õÀÌ Ã£¾Æ¿Ô½À´Ù.\n");
+		loseSb.append("ì•…ë‹¹ì— ì˜í•´ ì„œìš¸ì— í˜¼ë€ì´ ì°¾ì•„ì™”ìŠµë‹¤.\n");
 		loseSb.append("==============================\n");
 		Seoul seoul = new Seoul(civilianCount, villainCount, winSb.toString(), loseSb.toString());
 		seoul.run();
 		
-		
+		/*
 		// =================================================
-		// ´º¿å
+		// ë‰´ìš•
 		// =================================================
 		winSb = new StringBuffer();
 		loseSb = new StringBuffer();
 		civilianCount = 20000;
 		villainCount = 100;
 		winSb.append("==============================\n");
-		winSb.append("½´ÆÛ¸ÇÀÌ ´º¿åÀ» ±¸Çß½À´Ï´Ù.\n");
+		winSb.append("ìŠˆí¼ë§¨ì´ ë‰´ìš•ì„ êµ¬í–ˆìŠµë‹ˆë‹¤.\n");
 		winSb.append("==============================\n");
 		loseSb.append("==============================\n");
-		loseSb.append("¾Ç´ç¿¡ ÀÇÇØ ´º¿åÀÌ È¥¶õÀÌ Ã£¾Æ¿Ô½À´Ù.\n");
+		loseSb.append("ì•…ë‹¹ì— ì˜í•´ ë‰´ìš•ì´ í˜¼ë€ì´ ì°¾ì•„ì™”ìŠµë‹¤.\n");
 		loseSb.append("==============================\n");
 		NewYork newYork = new NewYork(civilianCount, villainCount, winSb.toString(), loseSb.toString());
 		newYork.run();
 		
 		
 		// =================================================
-		// ·±´ø
+		// ëŸ°ë˜
 		// =================================================
 		winSb = new StringBuffer();
 		loseSb = new StringBuffer();
 		civilianCount = 20000;
 		villainCount = 100;
 		winSb.append("==============================\n");
-		winSb.append("½´ÆÛ¸ÇÀÌ ·±´øÀ» ±¸Çß½À´Ï´Ù.\n");
+		winSb.append("ìŠˆí¼ë§¨ì´ ëŸ°ë˜ì„ êµ¬í–ˆìŠµë‹ˆë‹¤.\n");
 		winSb.append("==============================\n");
 		loseSb.append("==============================\n");
-		loseSb.append("¾Ç´ç¿¡ ÀÇÇØ ·±´ø¿¡ È¥¶õÀÌ Ã£¾Æ¿Ô½À´Ù.\n");
+		loseSb.append("ì•…ë‹¹ì— ì˜í•´ ëŸ°ë˜ì— í˜¼ë€ì´ ì°¾ì•„ì™”ìŠµë‹¤.\n");
 		loseSb.append("==============================\n");
 		London london = new London(civilianCount, villainCount, winSb.toString(), loseSb.toString());
 		london.run();
-		
+		*/
 	}
 }

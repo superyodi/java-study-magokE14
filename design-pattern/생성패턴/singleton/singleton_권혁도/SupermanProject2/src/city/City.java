@@ -8,6 +8,7 @@ import character.civilian.CivilainState;
 import character.civilian.Civilian;
 import character.villain.Villain;
 import character.villain.VillainState;
+import main.Main;
 
 public class City {
 	List<Civilian> civilianList = new ArrayList<>();
@@ -29,13 +30,22 @@ public class City {
 		//printCityStatus();
 	}
 	
-	public void run() {
-		new Thread(()->{
+	//public void run() {
+		//new Thread(()->{
+	public Thread run() {
+		Thread thread = new Thread(()->{
 			while(true) {
 				// =================================================
 				// 1. 승/패 판단
 				// =================================================
 				if(civilianList.size() > 0 && villainList.size() == 0) {
+					if(this instanceof Seoul) {
+						Main.atomicBoolean[0].set(true);
+					}else if(this instanceof NewYork) {
+						Main.atomicBoolean[1].set(true);
+					}else if(this instanceof London) {
+						Main.atomicBoolean[2].set(true);
+					}
 					System.out.println(winString);
 					break;
 				}
@@ -90,7 +100,9 @@ public class City {
 				// =================================================
 				//printCityStatus();
 			}
-		}).start();
+		});
+		thread.start();
+		return thread;
 	}
 	
 	private void printCityStatus() {
