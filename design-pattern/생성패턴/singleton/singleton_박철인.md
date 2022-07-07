@@ -50,17 +50,17 @@ public class LazyThread {
 3. 1번과 마찬가지로 코드로 동기화문제를 해결하므로 구조가 복잡해지고 정확도가 떨어질수있음
 ```java
 //인스턴스가 없는경우에만 락을거는 방법.
-	//코드로 동기화문제를 해결하려할시 구조가 복잡해지고 정확도가 떨어질수있음
-//	public static LazyThread getInstance() {
-//		if(lazyins==null) {
-//			synchronized(LazyThread.class) {
-//				if(lazyins ==null) {
-//					lazyins = new LazyThread();
-//				}
-//			}
-//		}
-//		return lazyins;
-//	}
+//코드로 동기화문제를 해결하려할시 구조가 복잡해지고 정확도가 떨어질수있음
+	public static LazyThread getInstance() {
+		if(lazyins==null) {
+			synchronized(LazyThread.class) {
+				if(lazyins ==null) {
+					lazyins = new LazyThread();
+				}
+			}
+		}
+		return lazyins;
+	}
 ```
 
 ### 구현방법3
@@ -71,14 +71,14 @@ public class LazyThread {
 // 클래스 안에 클래스(holder)를 두어 JVM의 클래스 로더 매커니즘과 클래스가 로드 되는 시점을 이용한 방법.
 // JVM의 클래스 초기화 과정에서 보장되는 원자적 특성 을 이용해 싱글톤의 초기화 문제에 대한 책임을 JVM에게 떠넘김
 // 실제로 많이 사용되는 방법이다.
-	
-//	private static class LazyHolder{
-//		public static final LazyThread lazyThread = new LazyThread();
-//	}
-//	
-//	public static LazyThread getInstance() {
-//		return LazyHolder.lazyThread;
-//	}
+public class Something {    
+	private Something() {}
+	private static class LazyHolder{
+		public static final LazyThread lazyThread = new LazyThread(); // final로 선언된 상수는 로딩되지 않음.
+	}	
+	public static LazyThread getInstance() {
+		return LazyHolder.lazyThread;
+	}
 ```
 
 ### 느낀점
