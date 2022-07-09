@@ -71,7 +71,7 @@ public class LazyThread {
 // 클래스 안에 클래스(holder)를 두어 JVM의 클래스 로더 매커니즘과 클래스가 로드 되는 시점을 이용한 방법.
 // JVM의 클래스 초기화 과정에서 보장되는 원자적 특성 을 이용해 싱글톤의 초기화 문제에 대한 책임을 JVM에게 떠넘김
 // 실제로 많이 사용되는 방법이다.
-public class Something {    
+class Something {    
 	private Something() {}
 	private static class LazyHolder{
 		public static final LazyThread lazyThread = new LazyThread(); // final로 선언된 상수는 로딩되지 않음.
@@ -79,6 +79,18 @@ public class Something {    
 	public static LazyThread getInstance() {
 		return LazyHolder.lazyThread;
 	}
+}
+```
+-  LazyThread 클래스는 언제 로딩 될까?
+	- 내부 클래스로 호출될때. 즉, getInstance() 메소드를 호출하여 사용할때 생긴다.
+	- 이유, JVM은 실행될때 클래스 모두를 메모리에 올려두지 않고 필요할때마다 메모리에 올려 관리하기 때문이다.
+```Java
+public class Main{
+	static void main(String args[]){
+		System.out.println(Something.getInstance()) //Something의 정적메소드가 호출됨에 따라 Something 클래스도 로드됨
+		//그다음 순서로 내부클래스 LazyHolder도 로드됨. 
+	}
+}
 ```
 
 ### 느낀점
@@ -89,6 +101,8 @@ public class Something {    
 -> 상속될수 없으니 final과 abstact도 달 수 없다.<br>
 -> abstract, final, static 또한 사용할수 없음.(메소드가 아니기 떄문)<br>
 -> 확장을 사용할 수 없는 패턴이니 개방폐쇄원칙에 위배된다.<br>
+3. 싱글톤 패턴을 공부하기 위해선 클래스로더의 프로세스도 알아야 한다.
 
 ### 참고자료
 - https://gyoogle.dev/blog/design-pattern/Singleton%20Pattern.html
+- [https://velog.io/@skyepodium/%ED%81%B4%EB%9E%98%EC%8A%A4%EB%8A%94-%EC%96%B8%EC%A0%9C-%EB%A1%9C%EB%94%A9%EB%90%98%EA%B3%A0-%EC%B4%88%EA%B8%B0%ED%99%94%EB%90%98%EB%8A%94%EA%B0%80#test-4-%EC%A0%95%EC%A0%81-%EB%A9%94%EC%86%8C%EB%93%9C-%ED%98%B8%EC%B6%9C](https://velog.io/@skyepodium/클래스는-언제-로딩되고-초기화되는가)
