@@ -5,32 +5,41 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import user.domain.User;
 
 public class UserDao {
+	private DataSource dataSource;
+	
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+
+	/*
 	private ConnectionMaker connectionMaker;
 	
-	/* 생성자 DI
+	// 생성자 DI
 	public UserDao(ConnectionMaker connectionMaker) {
 		this.connectionMaker = connectionMaker;
 	}
-	*/
 	
 	//수정자 DI
 	public void setConnectionMaker(ConnectionMaker connectionMaker) {
 		this.connectionMaker = connectionMaker;
 	}
-	
-	public void useTest() throws ClassNotFoundException, SQLException{
-		Connection c = connectionMaker.makeConnection();
+	*/
+	public void useTest() throws SQLException{
+		//Connection c = connectionMaker.makeConnection();
+		Connection c = dataSource.getConnection();
 		c.close();
 		System.out.println("userTest()실행");
 	}
 
-	public void add(User user) throws ClassNotFoundException, SQLException{
-		Connection c = connectionMaker.makeConnection();
+	public void add(User user) throws SQLException{
+		Connection c = dataSource.getConnection();
 		
 		String sql = "INSERT INTO users(id, name, password) values(?,?,?)";
 		PreparedStatement ps = c.prepareStatement(sql);
@@ -44,8 +53,8 @@ public class UserDao {
 		c.close();
 	}
 	
-	public User get(String id) throws ClassNotFoundException, SQLException{
-		Connection c = connectionMaker.makeConnection();
+	public User get(String id) throws SQLException{
+		Connection c = dataSource.getConnection();
 		
 		String sql = "SELECT * FROM users WHERE id = ?";
 		PreparedStatement ps = c.prepareStatement(sql);
